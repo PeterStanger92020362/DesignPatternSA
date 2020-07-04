@@ -3,11 +3,13 @@ package DesignPatternSA;
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Random;
 
 public class BingoGame extends Observable{
 
-    private ArrayList numbersToCall = new ArrayList();
+    private ArrayList<Integer> numbersToCall = new ArrayList<>();
     private ArrayList<Observer> observers;
+    private Random rand = new Random();
 
     //constructor
     public BingoGame(){
@@ -23,13 +25,22 @@ public class BingoGame extends Observable{
     }
 
     //getter
-    public ArrayList getNumbersToCall() {
+    public ArrayList<Integer> getNumbersToCall() {
         return numbersToCall;
     }
 
-    public int callOutNumber(){
+    public void callOutNumber(){
+        Integer calledNumber = 0;
 
+        calledNumber = getNumbersToCall().get(
+                rand.nextInt(
+                        getNumbersToCall().size()));
+        System.out.println("Calling out a random number between 1 and 10 inclusive.... " +
+                "the number is....." + calledNumber);
 
+        getNumbersToCall().remove(calledNumber);
+
+        notifyObservers(this,calledNumber);
 
     }
 
@@ -39,7 +50,7 @@ public class BingoGame extends Observable{
 
 
     // Observer/Observable methods
-    public void notifyObservers(Observable observable, int numberCalled){
+    public void notifyObservers(Observable observable, Integer numberCalled){
         for (Observer ob : observers) {
             ob.update(observable, numberCalled);
         }

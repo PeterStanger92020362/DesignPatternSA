@@ -1,16 +1,17 @@
 package DesignPatternSA;
 
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
 
 public class Player implements Observer {
 
-    private int[] bingoCard;
+    private ArrayList<Integer> bingoCard;
     private String name;
 
     //getters
-    public int[] getBingoCard() {
+    public ArrayList<Integer> getBingoCard() {
         return bingoCard;
     }
 
@@ -19,21 +20,23 @@ public class Player implements Observer {
     }
 
     //contructor
-    public Player(String name, int bingoCard[]){
+    public Player(String name, ArrayList<Integer> bingoCard){
         this.name = name;
         this.bingoCard = bingoCard;
+
+        System.out.println(name + " has entered the game, their bingo card numbers are " + bingoCard);
 
     }
 
     public void update(Observable mySubject, Object calledNumber){
 
-        /*
-        if(currentTicket.equals(this.getTicketNumber())) {
-            System.out.println("Thanks, here is my card number " + getTicketNumber() +
-                    ". I am ready to see the doctor.");
-        }
+        for (int i = 0; i < getBingoCard().size() ; i++) {
+            if (bingoCard[i] == (int)calledNumber){
+                bingoCard.
+            }
 
-         */
+
+        }
 
     }
 
