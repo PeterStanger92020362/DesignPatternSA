@@ -1,6 +1,7 @@
 package DesignPatternSA;
 
 import java.util.ArrayList;
+import java.util.Observer;
 
 
 public class DesignPatternSA {
@@ -17,14 +18,16 @@ public class DesignPatternSA {
         tamaBingoCard.add(6);
 
         ArrayList<Integer> ameliaBingoCard = new ArrayList<>();
-        tamaBingoCard.add(9);
-        tamaBingoCard.add(2);
-        tamaBingoCard.add(6);
+        ameliaBingoCard.add(9);
+        ameliaBingoCard.add(2);
+        ameliaBingoCard.add(6);
 
         ArrayList<Integer> jamalBingoCard = new ArrayList<>();
-        tamaBingoCard.add(4);
-        tamaBingoCard.add(7);
-        tamaBingoCard.add(2);
+        jamalBingoCard.add(4);
+        jamalBingoCard.add(7);
+        jamalBingoCard.add(2);
+
+
 
         Player players[] = {
                 new Player("Tama", tamaBingoCard),
@@ -32,23 +35,33 @@ public class DesignPatternSA {
                 new Player("Jamal", jamalBingoCard)
         };
 
-        for (Player each : players) {
-            bingo.registerObserver(each);
+        for (int i = 0; i < players.length ; i++) {
+            bingo.registerObserver(players[i]);
         }
 
 
+        while(bingo.getWinners()<1){
+
+            bingo.callOutNumber();
+
+            for (Player each: players) {
+                if(each.getHasWon()){
+                    bingo.setWinners();
+                }
+            }
 
 
+        }
 
+        //wrap up and congratulate winner/s
 
-
-
-
-
-
-
-
-
+        for(Player each: players){
+            if(bingo.getWinners()==1 && each.getHasWon()) {
+                System.out.println("BINGO! " + each.getName() + " has all their numbers called! " + each.getName() + " is the WINNER!");
+            } else if (bingo.getWinners()>=2 && each.getHasWon()){
+                System.out.println("BINGO! " + each.getName() + " has all their numbers called! they share their VICTORY!");
+            }
+        }
 
 
 
