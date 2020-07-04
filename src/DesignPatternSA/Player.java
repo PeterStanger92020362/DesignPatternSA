@@ -2,17 +2,15 @@ package DesignPatternSA;
 
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Set;
-
 
 
 public class Player implements Observer {
 
-    private Set bingoCard = new Set{};
+    private int[] bingoCard;
     private String name;
 
     //getters
-    public Set getBingoCard() {
+    public int[] getBingoCard() {
         return bingoCard;
     }
 
@@ -21,7 +19,7 @@ public class Player implements Observer {
     }
 
     //contructor
-    public Player(String name, Set bingoCard){
+    public Player(String name, int bingoCard[]){
         this.name = name;
         this.bingoCard = bingoCard;
 
